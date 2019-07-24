@@ -3,6 +3,17 @@ from datetime import datetime
 from .client import *
 from .block import *
 
+def test_run_live_smoke_test():
+    print("hello")
+    assert(True)
+    os.environ['http_proxy'] = '127.0.0.1:8888'
+    os.environ['https_proxy'] = '127.0.0.1:8888'
+    os.environ["REQUESTS_CA_BUNDLE"] = r"C:\Users\ian.kent\Desktop\Temp\FiddlerCerts\FiddlerRoot1.cer"
+
+    token = "62f07d5de29bb522cc818258d85fb4d60e2530c6909b44c1f1c5d75c397e512d37fdbe7d25d23d753a374f7421d6c87ed0381043d598fd570c5d6daff7acaeaa210ffb4ac4664e643b89a2e53daa"
+    parent_page_url = "https://www.notion.so/Smoke-Test-f51b9f0d709a490a8f7df503c2ace154"
+    run_live_smoke_test(token, parent_page_url)
+
 
 def run_live_smoke_test(token_v2, parent_page_url_or_id):
 
@@ -14,47 +25,47 @@ def run_live_smoke_test(token_v2, parent_page_url_or_id):
 
     print("Created base smoke test page at:", page.get_browseable_url())
 
-    col_list = page.children.add_new(ColumnListBlock)
-    col1 = col_list.children.add_new(ColumnBlock)
-    col2 = col_list.children.add_new(ColumnBlock)
-    col1.children.add_new(TextBlock, title="Some formatting: *italic*, **bold**, ***both***!")
-    col2.children.add_new(TodoBlock, title="I should be unchecked")
-    col2.children.add_new(TodoBlock, title="I should be checked", checked=True)
+    # col_list = page.children.add_new(ColumnListBlock)
+    # col1 = col_list.children.add_new(ColumnBlock)
+    # col2 = col_list.children.add_new(ColumnBlock)
+    # col1.children.add_new(TextBlock, title="Some formatting: *italic*, **bold**, ***both***!")
+    # col2.children.add_new(TodoBlock, title="I should be unchecked")
+    # col2.children.add_new(TodoBlock, title="I should be checked", checked=True)
 
-    page.children.add_new(HeaderBlock, title="The finest music:")
-    video = page.children.add_new(VideoBlock, width=100)
-    video.set_source_url("https://www.youtube.com/watch?v=oHg5SJYRHA0")
+    # page.children.add_new(HeaderBlock, title="The finest music:")
+    # video = page.children.add_new(VideoBlock, width=100)
+    # video.set_source_url("https://www.youtube.com/watch?v=oHg5SJYRHA0")
 
-    assert video in page.children
-    assert col_list in page.children
-    assert video in page.children.filter(VideoBlock)
-    assert col_list not in page.children.filter(VideoBlock)
+    # assert video in page.children
+    # assert col_list in page.children
+    # assert video in page.children.filter(VideoBlock)
+    # assert col_list not in page.children.filter(VideoBlock)
 
-    page.children.add_new(SubheaderBlock, title="A link back to where I came from:")
-    alias = page.children.add_alias(parent_page)
-    assert alias.is_alias
-    assert not page.is_alias
-    page.children.add_new(QuoteBlock, title="Clicking [here]({}) should take you to the same place...".format(page.parent.get_browseable_url()))
+    # page.children.add_new(SubheaderBlock, title="A link back to where I came from:")
+    # alias = page.children.add_alias(parent_page)
+    # assert alias.is_alias
+    # assert not page.is_alias
+    # page.children.add_new(QuoteBlock, title="Clicking [here]({}) should take you to the same place...".format(page.parent.get_browseable_url()))
 
-    # ensure __repr__ methods are not breaking
-    repr(page)
-    repr(page.children)
-    for child in page.children:
-        repr(child)
+    # # ensure __repr__ methods are not breaking
+    # repr(page)
+    # repr(page.children)
+    # for child in page.children:
+    #     repr(child)
 
-    page.children.add_new(SubheaderBlock, title="The order of the following should be alphabetical:")
+    # page.children.add_new(SubheaderBlock, title="The order of the following should be alphabetical:")
 
-    B = page.children.add_new(BulletedListBlock, title="B")
-    D = page.children.add_new(BulletedListBlock, title="D")
-    C2 = page.children.add_new(BulletedListBlock, title="C2")
-    C1 = page.children.add_new(BulletedListBlock, title="C1")
-    C = page.children.add_new(BulletedListBlock, title="C")
-    A = page.children.add_new(BulletedListBlock, title="A")
+    # B = page.children.add_new(BulletedListBlock, title="B")
+    # D = page.children.add_new(BulletedListBlock, title="D")
+    # C2 = page.children.add_new(BulletedListBlock, title="C2")
+    # C1 = page.children.add_new(BulletedListBlock, title="C1")
+    # C = page.children.add_new(BulletedListBlock, title="C")
+    # A = page.children.add_new(BulletedListBlock, title="A")
 
-    D.move_to(C, "after")
-    A.move_to(B, "before")
-    C2.move_to(C)
-    C1.move_to(C, "first-child")
+    # D.move_to(C, "after")
+    # A.move_to(B, "before")
+    # C2.move_to(C)
+    # C1.move_to(C, "first-child")
 
     cvb = page.children.add_new(CollectionViewBlock)
     collection = client.get_collection(client.create_record("collection", parent=cvb, schema=get_collection_schema()))
@@ -113,10 +124,10 @@ def run_live_smoke_test(token_v2, parent_page_url_or_id):
     result = view.build_query(sort=sort_params).execute()
     assert row in result
 
-    print("Check it out and make sure it looks good, then press any key here to delete it...")
-    input()
+    # print("Check it out and make sure it looks good, then press any key here to delete it...")
+    # input()
 
-    _delete_page_fully(page)
+    # _delete_page_fully(page)
 
 
 def _delete_page_fully(page):

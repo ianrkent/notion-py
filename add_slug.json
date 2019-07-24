@@ -1,0 +1,76 @@
+{
+    "operations": [
+        {
+            "id": "0ad24811-0f6a-499c-9086-3a6abdb68af8",
+            "table": "collection",
+            "path": [],
+            "command": "update",
+            "args": {
+                "schema": {
+                    "title": {
+                        "name": "Goal",
+                        "type": "title"
+                    },
+                    "/3{#": {
+                        "name": "Slug",
+                        "type": "select",
+                        "options": [
+                            {
+                                "id": "1efcb8e6-821d-4653-85dd-0698b5fff814",
+                                "value": "goal_1",
+                                "color": "red"
+                            },
+                            {
+                                "id": "596c75bb-5508-4444-b71a-fd0302e9a9b0",
+                                "value": "goal_2",
+                                "color": "brown"
+                            },
+                            {   
+                                "id": "a6947be5-57f2-4c71-853a-b45801fcb535",
+                                "value": "goal_3",
+                                "color": "gray"
+                            },
+                            {
+                                "id": "c1d3e52f-2a31-420a-9db4-121a023e90ac",
+                                "value": "testslug",
+                                "color": "pink"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "id": "69b442dc-e1b1-4a70-bea2-c70cac6b157b",
+            "table": "block",
+            "path": [
+                "properties",
+                "/3{#"
+            ],
+            "command": "set",
+            "args": [
+                [
+                    "testslug"
+                ]
+            ]
+        },
+        {
+            "id": "4da0503a-9dfa-412e-aca2-43d5a66bae08",
+            "table": "block",
+            "path": [],
+            "command": "update",
+            "args": {
+                "last_edited_time": 1561409340000
+            }
+        },
+        {
+            "id": "69b442dc-e1b1-4a70-bea2-c70cac6b157b",
+            "table": "block",
+            "path": [],
+            "command": "update",
+            "args": {
+                "last_edited_time": 1561409340000
+            }
+        }
+    ]
+}
